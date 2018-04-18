@@ -1,4 +1,4 @@
-<DOCTYPE js>
+
   <script>
     function initMap() {
   
