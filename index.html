@@ -9,10 +9,15 @@
     <script>
    
     function initMap() {
-  
-  var map = new google.maps.Map(document.getElementById('map')
-  
-}
+  var start = {lat: , lng: };
+  var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 4
+  center: start
+});
+var marker = new google.maps.Marker({
+    position: start, 
+    map: map
+});
 </script>
 <script async defer
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap">
@@ -23,19 +28,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tE
   <footer>
     
   </footer>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </html>
