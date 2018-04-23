@@ -1,4 +1,37 @@
+html {
+    background-color:black;
+}
+
 #map {
     height: 400px;
     width: 80%;
+}
+
+#banner {
+    width:80%;
+    height:10%;
+    border-width:3px;
+    border-color:white;
+    
+}
+
+#input {
+     width:80%;
+    height:20%;
+    border-color:white;
+    border-width:3px;
+}
+
+#busing {
+     width:80%;
+    height:25%;
+    border-color:white;
+    border-width:3px;
+}
+
+#weather {
+     width:80%;
+   height:25%;
+    border-color:white; 
+    border-width:3px;
 }
