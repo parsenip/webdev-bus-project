@@ -7,31 +7,72 @@ html {
     width: 80%;
 }
 
-#banner {
-    width:80%;
-    height:10%;
-    border-width:3px;
-    border-color:white;
-    
+.banner {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #34495e;
+
 }
 
-#input {
-     width:80%;
-    height:20%;
-    border-color:white;
-    border-width:3px;
+.input {
+
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #34495e;
+
 }
 
-#busing {
-     width:80%;
-    height:25%;
-    border-color:white;
-    border-width:3px;
+.maps {
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #34495e;
+}
+.busing {
+   -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #34495e;
 }
 
-#weather {
-     width:80%;
-   height:25%;
-    border-color:white; 
-    border-width:3px;
+.weather {
+    -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #34495e;
+}
+h1 {
+    color:white;
 }
