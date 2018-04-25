@@ -43,6 +43,11 @@
           xhttp.open("GET", weather);
           xhttp.overrideMimeType("application/json");
           xhttp.send();
+          Document.getElementById("curweath").innerHTML = data.weather
+          Document.getElementById("wind").innerHTML = data.wind_mph
+          Document.getElementById("windgust").innerHTML = data.wind_gust_mph
+          Document.getElementById("temp").innerHTML = data.temp_f
+          Document.getElementById("updated").innerHTML = data.observation_time
       </script>
       
   <!--    <script>
