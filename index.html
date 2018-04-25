@@ -35,7 +35,15 @@
       var weather = ""
           
       </script> -->
-      
+      <script>
+      var weather =  http:"api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+    
+      var data;
+      var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", weather);
+          xhttp.overrideMimeType("application/json");
+          xhttp.send();
+      </script>
       
   <!--    <script>
    
@@ -67,6 +75,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tE
         <option value"line">Line</option>
         <option value"stop">Stop</option>
     </select>
+    <input type="submit" value="submit">
 </form>
       </div>
    <div class="maps">
