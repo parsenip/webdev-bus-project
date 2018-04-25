@@ -6,68 +6,8 @@
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head> 
   <body>
-    
-    
      
-     
-     
-     
-     
-     
-     
-     
-     
-     
-     <!-- page structure above this comment code below-->
-     
-     
-     <!--Script for grabbing api's-->  
-   <!--   <script>
-     //bustime GET/eventlistiener
-      var bustime = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
-      
-      var data;
-      var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", bustime);
-          xhttp.overrideMimeType("application/json");
-          xhttp.send();
-          
-      var weather = ""
-          
-      </script> -->
-      <script>
-      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
-    
-      var data;
-      var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", weather);
-          xhttp.overrideMimeType("application/json");
-          xhttp.send();
-          function whenloaded(){
-          Document.getElementById("curweath").innerHTML = data.weather
-          Document.getElementById("wind").innerHTML = data.wind_mph
-          Document.getElementById("windgust").innerHTML = data.wind_gust_mph
-          Document.getElementById("temp").innerHTML = data.temp_f
-          Document.getElementById("updated").innerHTML = data.observation_time
-        }
-      </script>
-      
-  <!--    <script>
    
-    function initMap() {
-  var start = {lat: , lng: };
-  var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 4
-  center: start
-});
-var marker = new google.maps.Marker({
-    position: start, 
-    map: map
-});
-      </script> -->
-<!-- <script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap">
-</script> -->
 //yellow #ffff4d
 //button blue #12377E    
  <div class="banner">
@@ -95,10 +35,67 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tE
   
   <div class="weather">
       <script>
-      document.write(last updated "updated")
+      document.write("last updated" + data.observation_time)
       </script>
   </div>
   
+  
+    <!-- page structure above this comment code below-->
+     
+     
+     <!--Script for grabbing api's-->  
+   <!--   <script>
+     //bustime GET/eventlistiener
+      var bustime = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
+      
+      var data;
+      var xhttp = new XMLHttpRequest();
+          xhttp.open("GET", bustime);
+          xhttp.overrideMimeType("application/json");
+          xhttp.send();
+          
+      var weather = ""
+          
+      </script> -->
+      <script>
+      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+    
+      var data;
+      
+      var xhttp = new XMLHttpRequest();
+          
+          xhttp.open("GET", weather);
+          xhttp.overrideMimeType("application/json");
+          xhttp.onload = whenloaded;
+          xhttp.send();
+          
+          var Updated = 
+          function whenloaded(){
+          Document.getElementById("curweath").innerHTML = data.weather;
+          Document.getElementById("wind").innerHTML = data.wind_mph;
+          Document.getElementById("windgust").innerHTML = data.wind_gust_mph;
+          Document.getElementById("temp").innerHTML = data.temp_f;
+          Document.getElementById("updated").innerHTML = data.observation_time;
+              
+        }
+      </script>
+      
+  <!--    <script>
+   
+    function initMap() {
+  var start = {lat: , lng: };
+  var map = new google.maps.Map(document.getElementById('map'), {
+  zoom: 4
+  center: start
+});
+var marker = new google.maps.Marker({
+    position: start, 
+    map: map
+});
+      </script> -->
+<!-- <script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap">
+</script> -->
   </body>
   
 
