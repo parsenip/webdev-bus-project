@@ -36,18 +36,20 @@
           
       </script> -->
       <script>
-      var weather =  http:"api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
     
       var data;
       var xhttp = new XMLHttpRequest();
           xhttp.open("GET", weather);
           xhttp.overrideMimeType("application/json");
           xhttp.send();
+          function whenloaded(){
           Document.getElementById("curweath").innerHTML = data.weather
           Document.getElementById("wind").innerHTML = data.wind_mph
           Document.getElementById("windgust").innerHTML = data.wind_gust_mph
           Document.getElementById("temp").innerHTML = data.temp_f
           Document.getElementById("updated").innerHTML = data.observation_time
+        }
       </script>
       
   <!--    <script>
@@ -92,7 +94,9 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tE
 </div>
   
   <div class="weather">
-      <h1>Weather test</h1>
+      <script>
+      document.write(last updated "updated")
+      </script>
   </div>
   
   </body>
