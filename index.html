@@ -34,9 +34,19 @@
 </div>
   
   <div class="weather">
-      <script>
-      document.write("last updated" + data.observation_time)
-      </script>
+     <h1>Weather</h1>
+      <div id="Updated">
+      
+      </div>
+      <div id="curweath">
+      
+      </div> 
+      <div id="windspeed">
+      </div>
+      
+      <div id="temp">
+      
+      </div>
   </div>
   
   
@@ -58,24 +68,35 @@
           
       </script> -->
       <script>
-      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
     
       var data;
       
       var xhttp = new XMLHttpRequest();
           
-          xhttp.open("GET", weather);
-          xhttp.overrideMimeType("application/json");
+          xhttp.open("GET",weather);
           xhttp.onload = whenloaded;
           xhttp.send();
           
-          var Updated = 
+          var curweath =  document.getElementById("curweath");
+          var Updated = document.getElementById("Updated");
+          var windspeed = document.getElementById("windspeed");
+          //var windLow = document.getElementById("windLow");
+          var Temp = document.getElementById("temp")
           function whenloaded(){
-          Document.getElementById("curweath").innerHTML = data.weather;
-          Document.getElementById("wind").innerHTML = data.wind_mph;
-          Document.getElementById("windgust").innerHTML = data.wind_gust_mph;
-          Document.getElementById("temp").innerHTML = data.temp_f;
-          Document.getElementById("updated").innerHTML = data.observation_time;
+          
+              data = JSON.parse(xhttp.responseText);
+              
+              Updated.innerHTML = "Date updated: " + data.observation_time;
+              curweath.innerHTML = "Current Weather: " + data.weather;
+              windspeed.innerHTML = "Current wind speed:" + data.wind_mph + " with gusts up to " + data.wind_gust_mph;
+              Temp.innerHTML = "current temperture: " + data.temp_f;
+              
+         // Document.getElementById("curweath").innerHTML = data.weather;
+         // Document.getElementById("wind").innerHTML = data.wind_mph;
+         // Document.getElementById("windgust").innerHTML = data.wind_gust_mph;
+         // Document.getElementById("temp").innerHTML = data.temp_f;
+         // Document.getElementById("updated").innerHTML = data.observation_time;
               
         }
       </script>
