@@ -19,8 +19,8 @@
  <form action="">
     <select name="Address">
        <!-- <option value="borough">borough</option> -->
-        <option value"line">Line</option>
-        <option value"stop">Stop</option>
+        <option value="line">Line</option>
+        <option value="stop">Stop</option>
     </select>
     <input type="submit" value="submit">
 </form>
@@ -54,19 +54,37 @@
      
      
      <!--Script for grabbing api's-->  
-   <!--   <script>
+   <script>
      //bustime GET/eventlistiener
-      var bustime = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
-      
-      var data;
+      var urlMBTA = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
+      var dataMBTA;
+      var urlMTA = "http://bustime.mta.info/api/where/routes-for-agency/MTA%20NYCT.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTA;
+    
       var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", bustime);
+          xhttp.onload = whenLoadedMBTA;
+          xhttp.open("GET", urlMBTA);
           xhttp.overrideMimeType("application/json");
           xhttp.send();
           
-      var weather = ""
-          
-      </script> -->
+    function whenLoadedMBTA() {
+    
+        dataMBTA = JSON.parse(xhttp.responseText);
+        
+        xhttp.open("GET", urlMTA);
+        xhttp.onload = whenLoadedMTA;
+        xhttp.overrideMimeType("application/json");
+        xhttp.send();
+
+    }
+
+      function whenLoadedMTA() {
+        dataMTA = JSON.parse(xhttp.responseText);
+        
+        
+      }    
+      </script>
+
       <script>
       var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
     
