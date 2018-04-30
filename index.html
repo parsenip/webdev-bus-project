@@ -87,10 +87,10 @@
           
               data = JSON.parse(xhttp.responseText);
               
-              Updated.innerHTML = "Date updated: " + data.observation_time;
-              curweath.innerHTML = "Current Weather: " + data.weather;
-              windspeed.innerHTML = "Current wind speed:" + data.wind_mph + " with gusts up to " + data.wind_gust_mph;
-              Temp.innerHTML = "current temperture: " + data.temp_f;
+              Updated.innerHTML = "Date updated: " + data.current_observation.observation_time;
+              curweath.innerHTML = "Current Weather: " + data.current_observation.weather;
+              windspeed.innerHTML = "Current wind speed: " + data.current_observation.wind_mph + "MPH with gusts up to " + data.current_observation.wind_gust_mph + "MPH";
+              Temp.innerHTML = "current temperture: " + data.current_observation.temp_f;
               
          // Document.getElementById("curweath").innerHTML = data.weather;
          // Document.getElementById("wind").innerHTML = data.wind_mph;
