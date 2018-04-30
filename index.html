@@ -27,6 +27,7 @@
       </div>
    <div class="maps">
        <h1>Google Maps</h1>
+       <div id="map"></div>
    </div> 
         
 <div class="busing">
@@ -101,22 +102,24 @@
         }
       </script>
       
-  <!--    <script>
+     <script>
    
-    function initMap() {
-  var start = {lat: , lng: };
-  var map = new google.maps.Map(document.getElementById('map'), {
-  zoom: 4
-  center: start
-});
-var marker = new google.maps.Marker({
-    position: start, 
-    map: map
-});
-      </script> -->
-<!-- <script async defer
-src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap">
-</script> -->
+   function initMap() {
+        var NY = {lat: 40.7128, lng: -73.935242};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: NY
+        });
+        var marker = new google.maps.Marker({
+          position: NY,
+          map: map
+        });
+      }
+
+      </script> 
+ <script 
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap" async defer>
+</script>
   </body>
   
 
