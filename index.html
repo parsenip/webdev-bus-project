@@ -57,19 +57,21 @@
      <!--Script for grabbing api's-->  
    <script>
      //bustime GET/eventlistiener
-      var urlMBTA = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
+      var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
       var dataMBTA;
-      var urlMTA = "http://bustime.mta.info/api/where/routes-for-agency/MTA%20NYCT.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
       var dataMTA;
+       var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTABC;
     
       var xhttp = new XMLHttpRequest();
           xhttp.onload = whenLoadedMBTA;
           xhttp.open("GET", urlMBTA);
-          xhttp.overrideMimeType("application/json");
+         // xhttp.overrideMimeType("application/json");
           xhttp.send();
           
     function whenLoadedMBTA() {
-    
+    //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
         
         xhttp.open("GET", urlMTA);
@@ -84,14 +86,20 @@
         
         
       }    
+      
+      function whenLoadedMTABC() {
+        dataMTABC = 
+        JSON.parse(xhttp.responseText);
+      }
       </script>
 
       <script>
-      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+      //" + stopLat + ", " + stopLng + ".json"
     
       var data;
       
-      var xhttp = new XMLHttpRequest();
+      /*var xhttp = new XMLHttpRequest();
           
           xhttp.open("GET",weather);
           xhttp.onload = whenloaded;
@@ -117,13 +125,16 @@
          // Document.getElementById("temp").innerHTML = data.temp_f;
          // Document.getElementById("updated").innerHTML = data.observation_time;
               
-        }
+        }*/
       </script>
       
      <script>
    
    function initMap() {
         var NY = {lat: 40.7128, lng: -73.935242};
+        //var stopLat = 
+        //var stopLng
+        //lat: stopLat, lng:stopLng
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4,
           center: NY
