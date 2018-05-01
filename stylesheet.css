@@ -8,6 +8,7 @@ html {
 }
 
 .banner {
+  width: 60%;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   margin: 20px;
@@ -18,6 +19,7 @@ html {
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
   background: #34495e;
+  text-align: center;
 
 }
 

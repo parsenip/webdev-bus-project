@@ -11,7 +11,8 @@
 //yellow #ffff4d
 //button blue #12377E    
  <div class="banner">
-     <h1>Banner test</h1>
+     <h1>Bus It!</h1>
+     <h3>Your one stop for new york public transport information</h3>
  </div>
  
  
@@ -47,6 +48,9 @@
       
       <div id="temp">
       
+      </div>
+      <div id="feelslike">
+          
       </div>
   </div>
   
@@ -102,14 +106,16 @@
           var windspeed = document.getElementById("windspeed");
           //var windLow = document.getElementById("windLow");
           var Temp = document.getElementById("temp")
+          var feelslike = document.getElementById("feelslike")
           function whenloaded(){
           
               data = JSON.parse(xhttp.responseText);
               
               Updated.innerHTML = "Date updated: " + data.current_observation.observation_time;
               curweath.innerHTML = "Current Weather: " + data.current_observation.weather;
-              windspeed.innerHTML = "Current wind speed: " + data.current_observation.wind_mph + "MPH with gusts up to " + data.current_observation.wind_gust_mph + "MPH";
-              Temp.innerHTML = "current temperture: " + data.current_observation.temp_f;
+              windspeed.innerHTML = "Current wind speed: " + data.current_observation.wind_mph + "MPH" + " (" + data.current_observation.wind_kph + "KPH)" + ", with gusts up to " + data.current_observation.wind_gust_mph + "MPH (" + data.current_observation.wind_gust_kph + "KPH)";
+              Temp.innerHTML = "Current temperture: " + data.current_observation.temp_f + "F (" + data.current_observation.temp_c + "C)"
+              feelslike.innerHTML = "Feels like: " + data.current_observation.feelslike_string;
               
          // Document.getElementById("curweath").innerHTML = data.weather;
          // Document.getElementById("wind").innerHTML = data.wind_mph;
@@ -125,7 +131,7 @@
    function initMap() {
         var NY = {lat: 40.7128, lng: -73.935242};
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4,
+          zoom: 10,
           center: NY
         });
         var marker = new google.maps.Marker({
