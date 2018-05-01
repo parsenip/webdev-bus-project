@@ -61,19 +61,25 @@
      <!--Script for grabbing api's-->  
    <script>
      //bustime GET/eventlistiener
-      var urlMBTA = "http://bustime.mta.info/api/where/routes-for-agency/MBTA.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2" //where the api call and key goes
+      var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
       var dataMBTA;
-      var urlMTA = "http://bustime.mta.info/api/where/routes-for-agency/MTA%20NYCT.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
       var dataMTA;
-    
+       var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTABC;
+    var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+    var dataCurent;
+    //" + stopLat + ", " + stopLng + ".json"
+    var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
+    var dataForecast;
       var xhttp = new XMLHttpRequest();
           xhttp.onload = whenLoadedMBTA;
           xhttp.open("GET", urlMBTA);
-          xhttp.overrideMimeType("application/json");
+         // xhttp.overrideMimeType("application/json");
           xhttp.send();
           
     function whenLoadedMBTA() {
-    
+    //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
         
         xhttp.open("GET", urlMTA);
@@ -88,10 +94,44 @@
         
         
       }    
+      
+      function whenLoadedMTABC() {
+        dataMTABC = 
+        JSON.parse(xhttp.responseText);
+      }
+      
+      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+    var dataCurrent;
+    //" + stopLat + ", " + stopLng + ".json"
+    /*var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
+    var dataForecast;*/
+      
+      
+        var curweath =  document.getElementById("curweath");
+          var Updated = document.getElementById("Updated");
+          var windspeed = document.getElementById("windspeed");
+          //var windLow = document.getElementById("windLow");
+          var Temp = document.getElementById("temp")
+          
+            function whenLoadedCurrent() {
+      dataCurrent =
+      JSON.parse(xhttp.responseText)
+    
+              Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
+              curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
+              windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH";
+              Temp.innerHTML = "current temperture: " + dataCurrent.current_observation.temp_f;
+      
+      }
+      function whenLoadedForecast(){
+      dataForecast = 
+      JSON.parse(xhttp.responseText);
+      }
       </script>
 
-      <script>
-      var weather = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+      <script>/*
+      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
+      
     
       var data;
       
@@ -123,13 +163,16 @@
          // Document.getElementById("temp").innerHTML = data.temp_f;
          // Document.getElementById("updated").innerHTML = data.observation_time;
               
-        }
+        }*/
       </script>
       
      <script>
    
    function initMap() {
         var NY = {lat: 40.7128, lng: -73.935242};
+        //var stopLat = 
+        //var stopLng
+        //lat: stopLat, lng:stopLng
         var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 10,
           center: NY
