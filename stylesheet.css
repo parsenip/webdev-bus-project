@@ -13,7 +13,7 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
-  
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
@@ -44,6 +44,7 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
@@ -56,6 +57,7 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+    border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
@@ -69,6 +71,7 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
@@ -84,6 +87,7 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
