@@ -76,79 +76,99 @@
      <!--Script for grabbing api's-->  
    <script>
      //bustime GET/eventlistiener
-      var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
-      var dataMBTA;
-   //   var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
-    //  var dataMTA;
-  //     var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
-//      var dataMTABC;
-      
+      var urlBus = "http://bustime.mta.info/api/siri/stop-monitoring.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&OperatorRef=MTA&MonitoringRef=308209&LineRef=MTA%20NYCT_B63"; //where the api call and key goes
+      var dataBus;
+ 
     var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
     var dataCurent;
-    //" + stopLat + ", " + stopLng + ".json"
     var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
     var dataForecast;
       var xhttp = new XMLHttpRequest();
-          xhttp.onload = whenLoadedMBTA;
-          xhttp.open("GET", urlMBTA);
-         // xhttp.overrideMimeType("application/json");
+          xhttp.open("GET", urlBus);
+          xhttp.onload = initMap;
           xhttp.send();
          
        
-    function whenLoadedMBTA() {
-    //  console.log(xhttp);
-        dataMBTA = JSON.parse(xhttp.responseText);
-        
-        xhttp.open("GET", urlMTA);
-        xhttp.onload = weatherfetch;
-        xhttp.overrideMimeType("application/json");
-        xhttp.send();
+       function initMap() {
         //Loads info from this link, not sure which wrapper this is.
         //http://bustime.mta.info/api/siri/stop-monitoring.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&OperatorRef=MTA&MonitoringRef=308209&LineRef=MTA%20NYCT_B63
-        var buslng =dataMBTA.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
-        var buslat = dataMBTA.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+        var buslng =dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
+        var buslat = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+           
+           
+        var Testbus = {lat: buslat , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
+        //var stopLat = 
+        //var stopLng
+        //lat: stopLat, lng:stopLng
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: Testbus
+        });
+        
+       var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Testbus</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Testbus</b>, On route:<b>route name</b>, is a large ' +
+            
+            '</div>'+
+            '</div>';
+       
+       var marker = new google.maps.Marker({
+          position: Testbus,
+          map: map
+           
+        });
+       marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+       
+       
+       
+       
+    function Weatherfetch() {
+        dataBus = JSON.parse(xhttp.responseText);
+        
+        xhttp.open("GET", weatherCurrent);
+        xhttp.onload = whenLoadedCurrent;
+        xhttp.overrideMimeType("application/json");
+        xhttp.send();
+        
         
     }
 
-     // function whenLoadedMTA() {
-        //dataMTA = JSON.parse(xhttp.responseText);
-        
-        
-    //  }    
-      
-     // function whenLoadedMTABC() {
-      //  dataMTABC = JSON.parse(xhttp.responseText);
-    //  }
-       
+    
       
       var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
-    var dataCurrent;
+      var dataCurrent;
    
       
       
-        var curweath =  document.getElementById("curweath");
+          var curweath =  document.getElementById("curweath");
           var Updated = document.getElementById("Updated");
           var windspeed = document.getElementById("windspeed");
           var Temp = document.getElementById("temp")
           var feelslike = document.getElementById("feelslike")
           
-          function weatherfetch() {
-              xhttp.open("GET",weatherCurrent);
-              xhttp.onload = whenLoadedCurrent;
-              xhttp.send();
-         
+          
            function whenLoadedCurrent() {
                  
-      dataCurrent = JSON.parse(xhttp.responseText)
+                dataCurrent = JSON.parse(xhttp.responseText)
     
-               Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
-              curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
-              windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
-              Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
-              feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
+                    Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
+              
+                    curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
+              
+                    windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
+              
+                    Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
+              
+                    feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
       
             }
-          }
+          
            
      // function whenLoadedForecast(){
      // dataForecast = 
@@ -192,40 +212,7 @@
               
         }*/
       </script>
-      
-     <script>
-   
-   function initMap() {
-        var Testbus = {lat: buslat , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
-        //var stopLat = 
-        //var stopLng
-        //lat: stopLat, lng:stopLng
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: Testbus
-        });
-        
-       var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Testbus</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Testbus</b>, On route:<b>route name</b>, is a large ' +
-            
-            '</div>'+
-            '</div>';
-       
-       var marker = new google.maps.Marker({
-          position: Testbus,
-          map: map
-           Title: 'Testbus (Busroute)'
-        });
-       marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      }
-
-      </script> 
+    
  <script> 
 
 </script>
