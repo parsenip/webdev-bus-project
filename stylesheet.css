@@ -1,5 +1,5 @@
 html {
-    background-color:black;
+    background-color:#ffff4d;
 }
 
 #map {
@@ -13,14 +13,15 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  background: #34495e;
+  background: #12377E;
   text-align: center;
-
+  
 }
 
 .input {
@@ -34,7 +35,7 @@ html {
   color: white;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  background: #34495e;
+  background: #12377E;
 
 }
 
@@ -43,24 +44,26 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  background: #34495e;
+  background: #12377E;
 }
 .busing {
    -webkit-box-sizing: content-box;
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+    border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  background: #34495e;
+  background: #12377E;
 }
 
 .weather {
@@ -68,13 +71,70 @@ html {
   box-sizing: content-box;
   margin: 20px;
   padding: 5px;
+  border-radius:25px;
   border: 3px solid rgba(255,255,255,1);
   font: normal 16px/1 "Times New Roman", Times, serif;
   color: white;
   -o-text-overflow: ellipsis;
   text-overflow: ellipsis;
-  background: #34495e;
+  background: #12377E;
 }
+
+.about {
+  text-align:center;
+    width:60%;
+    -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 20px;
+  padding: 5px;
+  border-radius:25px;
+  border: 3px solid rgba(255,255,255,1);
+  font: normal 16px/1 "Times New Roman", Times, serif;
+  color: white;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: #12377E;
+}
+
 h1 {
     color:white;
+}
+
+
+ul {
+    width:auto;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: #12377E;
+}
+
+.nav {
+    width:165.95px;
 }
