@@ -13,7 +13,7 @@
     button blue #12377E -->   
 =======
   
- <iframe src="http://free.timeanddate.com/clock/i681093j/n179/fn15/fs20/ftb/th2/ta1" frameborder="0" width="169" height="25"></iframe>
+<iframe src="http://free.timeanddate.com/clock/i68130mu/n179/fn15/fs30/fcfff/tct/pct" frameborder="0" width="177" height="36" allowTransparency="true"></iframe>
  
 >>>>>>> ed8a5767750f15b17b135742d9db779a963f3a4c
  <div class="banner">
@@ -33,11 +33,11 @@
  
 <div class="input">
  <form action="">
- <select name="line" value="line">Line</select>
-       <!-- <option value="borough">borough</option> --><br>
-        <select name="route" value="route">Route
-       
-    </select><br>
+    <select name="Address">
+       <!-- <option value="borough">borough</option> -->
+        <option value="line">Line</option>
+        <option value="stop">Stop</option>
+    </select>
     <input type="submit" value="submit">
 </form>
       </div>
@@ -75,136 +75,73 @@
      
      <!--Script for grabbing api's-->  
    <script>
-	//bustime GET/eventlistiener
-	var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
-	var dataMBTA;
-	var infoMBTA;
-      
-      
-	var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
-	var dataMTA;
-	var infoMTA;
-      
-      
-	var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
-	var dataMTABC;
-	var infoMTABC;
-      
-    var busInfo = []; //ALL THE THINGS GO HERE!
-      
-	var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
-	var dataCurent;
-	var infoCurent;
-	
-	
-	//" + stopLat + ", " + stopLng + ".json"
-	var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
-	var dataForecast;
-	
-	//XMLHttpRequest Object
-	var xhttp = new XMLHttpRequest();
+     //bustime GET/eventlistiener
+      var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
+      var dataMBTA;
+      var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTA;
+       var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTABC;
+    var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+    var dataCurent;
+    //" + stopLat + ", " + stopLng + ".json"
+    var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
+    var dataForecast;
+      var xhttp = new XMLHttpRequest();
           xhttp.onload = whenLoadedMBTA;
           xhttp.open("GET", urlMBTA);
          // xhttp.overrideMimeType("application/json");
           xhttp.send();
-    
-    //API Chain #1
+          
     function whenLoadedMBTA() {
-        
+    //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
         
         xhttp.open("GET", urlMTA);
         xhttp.onload = whenLoadedMTA;
         xhttp.overrideMimeType("application/json");
         xhttp.send();
-        
-        console.log("MBTA Loaded...");
 
     }
-	
-	//API Chain #2
-	function whenLoadedMTA() {
-		dataMTA = JSON.parse(xhttp.responseText);
-		
-		//Data processing
-        for (var i in dataMTA.data.list) {
-        	
-        	busInfo[dataMTA.data.list[i].shortName] = dataMTA.data.list[i];
-        	
-        }
-		
-		xhttp.open("GET", urlMTABC);
-        xhttp.onload = whenLoadedMTABC;
-        xhttp.overrideMimeType("application/json");
-        xhttp.send();
-        
-        console.log("MTA Loaded...");
 
-	}    
-    
-    //API Chain #3
-	function whenLoadedMTABC() {
-		
-		dataMTABC = JSON.parse(xhttp.responseText);
-		
-		//Data processing
-        for (var i in dataMTABC.data.list) {
-        	
-        	busInfo[dataMTABC.data.list[i].shortName] = dataMTABC.data.list[i];
-        	
-        }
-		
-		xhttp.open("GET", weatherCurrent);
-        xhttp.onload = whenLoadedCurrent;
-        xhttp.overrideMimeType("application/json");
-        xhttp.send();
-		
-		console.log("MTABC Loaded...");
-		
-	}
+      function whenLoadedMTA() {
+        dataMTA = JSON.parse(xhttp.responseText);
+        
+        
+      }    
       
-	var curweath =  document.getElementById("curweath");
-	var Updated = document.getElementById("Updated");
-	var windspeed = document.getElementById("windspeed");
-	//var windLow = document.getElementById("windLow");
-	var Temp = document.getElementById("temp");
-	
-	//API Chain #4
-	function whenLoadedCurrent() {
-		
-		dataCurrent = JSON.parse(xhttp.responseText);
+      function whenLoadedMTABC() {
+        dataMTABC = 
+        JSON.parse(xhttp.responseText);
+      }
+      
+      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+    var dataCurrent;
+    //" + stopLat + ", " + stopLng + ".json"
+    /*var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
+    var dataForecast;*/
+      
+      
+        var curweath =  document.getElementById("curweath");
+          var Updated = document.getElementById("Updated");
+          var windspeed = document.getElementById("windspeed");
+          //var windLow = document.getElementById("windLow");
+          var Temp = document.getElementById("temp")
+          
+            function whenLoadedCurrent() {
+      dataCurrent =
+      JSON.parse(xhttp.responseText)
     
-		Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
-		curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
-		windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH";
-		Temp.innerHTML = "current temperture: " + dataCurrent.current_observation.temp_f;
-		
-		console.log("Weather Loaded...");
-		
-		displayBusses();
-		
-	}
-	
-	
-	function whenLoadedForecast(){
-		dataForecast = 
-		JSON.parse(xhttp.responseText);
-	}
-	
-	var line = document.getElementById("line");
-	//Final chain link
-	function displayBusses() {
-	
-		for (var i in busInfo) {
-		
-			//busInfo[i]
-            line += '<option value="' +busInfo[i];
-		
-		}
-	
-	}
-	
-	
+              Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
+              curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
+              windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH";
+              Temp.innerHTML = "current temperture: " + dataCurrent.current_observation.temp_f;
+      
+      }
+      function whenLoadedForecast(){
+      dataForecast = 
+      JSON.parse(xhttp.responseText);
+      }
       </script>
 
       <script>/*
