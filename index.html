@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>Bus It! - Home</title>
+    <title>Bus It! NYC - Home</title>
     
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head> 
@@ -13,11 +13,11 @@
     button blue #12377E -->   
 
   
-<iframe src="http://free.timeanddate.com/clock/i6813igv/n179/fs30/fcfff/tc12377e/pc12377e" frameborder="0" width="241" height="36"></iframe>
+<iframe src="http://free.timeanddate.com/clock/i6813igv/n179/fs30/fcfff/tc12377e/pc12377e" frameborder="0" width="241" height="36" id="clock"></iframe>
  
 
  <div class="banner">
-     <h1>BusIt! (Demo)</h1>
+     <h1>BusIt! NYC (Demo)</h1>
      <h3>Your (literal) one stop for the NYC bus system</h3>
  </div>
  
@@ -33,41 +33,44 @@
  
 <div class="input">
  <form action="">
-    <select name="Address">
        <!-- <option value="borough">borough</option> -->
-        <option value="line">Line</option>
-        <option value="stop">Stop</option>
-    </select>
+       <select name="line">Line<br>
+       <option value="Choose A Bus Line" selected>Choose A Bus Line</option></select><br>
+        <select value="stop" name="stop">Stop
+    </select><br>
     <input type="submit" value="submit">
 </form>
       </div>
-   <div class="maps">
-       <h1>Google Maps</h1>
-       <div id="map"></div>
-   </div> 
-        
-<div class="busing">
-    <h1>Busing test</h1>
+      <div class="busing">
+    <h1>Bus info goes here</h1>
 </div>
-  
-  <div class="weather">
-     <h1>Weather</h1>
-      <div id="Updated">
-      
-      </div>
+    <div class="weather">
+    
+     
       <div id="curweath">
       
-      </div> 
+      </div> <br>
       <div id="windspeed">
-      </div>
+      </div><br>
       
       <div id="temp">
       
-      </div>
+      </div><br>
       <div id="feelslike">
           
+      </div><br>
+      <div id="Updated">
+      
       </div>
   </div>
+   <div class="maps">
+       <h1>Bus Tracking Would Go Here</h1>
+       <div id="map"></div>
+   </div> 
+        
+
+  
+
   
   
     <!-- page structure above this comment code below-->
@@ -84,7 +87,7 @@
    // var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
    // var dataForecast;
       var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", urlBus);
+          xhttp.open("GET", weatherCurrent);
           xhttp.onload = initMap;
           xhttp.send();
          
@@ -96,11 +99,11 @@
           xhttp.onload = Weatherfetch;
           xhttp.send();
         
-        var buslng = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
-        var buslat = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+        /*var buslng = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
+        var buslat = dataBusSiri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;*/
            
            
-        var Testbus = {lat: buslat , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
+        var Testbus = {lat: 40.730610 , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
         //var stopLat = 
         //var stopLng
         //lat: stopLat, lng:stopLng
@@ -124,12 +127,17 @@
           map: map
            
         });
+        var infowindow = new google.maps.InfoWindow({
+        content: contentString
+        });
        marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
       }
        
-       
+             var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+      var dataCurrent;
+   
        
        
     function Weatherfetch() {
@@ -145,9 +153,7 @@
 
     
       
-      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
-      var dataCurrent;
-   
+
       
       
           var curweath =  document.getElementById("curweath");
@@ -160,16 +166,18 @@
            function whenLoadedCurrent() {
                  
                 dataCurrent = JSON.parse(xhttp.responseText)
+                
+                curweath.innerHTML = '<h1>Current Weather: </h1><h2 style="color: pink;">' + dataCurrent.current_observation.weather + '</h2>';
     
                     Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
               
-                    curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
+                    
               
-                    windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
+                    windspeed.innerHTML = '<h1>Current wind speed: </h1><h3 style="color: pink;">' + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)</h3>";
               
-                    Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
+              Temp.innerHTML = '<h1>Current temperture: </h1><h3 style="color: pink;">' + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)</h3>";
               
-                    feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
+                    feelslike.innerHTML = '<h1>Feels like: </h1><h3 style="color: pink;">' + dataCurrent.current_observation.feelslike_string + '</h3>';
       
             }
           
@@ -179,7 +187,8 @@
      // JSON.parse(xhttp.responseText);
      // }
       </script>
-
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCK0qkhAiByKvp2975fyjXw5tEmN4PG1io&callback=initMap"
+    async defer></script>
       <script>/*
       var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
       
@@ -217,9 +226,7 @@
         }*/
       </script>
     
- <script> 
 
-</script>
 
 
   </body>

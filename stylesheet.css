@@ -24,8 +24,9 @@ html {
   
 }
 
+
 .input {
-  width:30%;
+  width:70%;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   margin: 20px;
@@ -137,4 +138,13 @@ li a:hover:not(.active) {
 
 .nav {
     width:165.95px;
+    padding-left: 25px;
+}
+select, option {
+width: 100%;
+height: 60px;
+font-size: 20px
+}
+#clock {
+padding-left: 25px;
 }
