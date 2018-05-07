@@ -25,7 +25,7 @@ html {
 }
 
 .input {
-  width:0%;
+  width:30%;
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
   margin: 20px;
@@ -95,17 +95,11 @@ html {
   text-overflow: ellipsis;
   background: #12377E;
 }
-.weather-head {
-font-weight: bold;
-color:green;
-}
-#weather-content {
-color: brown;
-}
 
 h1 {
     color:white;
 }
+
 
 ul {
     width:auto;
@@ -143,7 +137,4 @@ li a:hover:not(.active) {
 
 .nav {
     width:165.95px;
-}
-option{
-width: 150px;
 }
