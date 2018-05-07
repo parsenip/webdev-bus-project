@@ -76,10 +76,13 @@
      <!--Script for grabbing api's-->  
    <script>
      //bustime GET/eventlistiener
-      var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
-      var dataMBTA;
-   //   var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
-    //  var dataMTA;
+     // This pulls from real-time bus info
+     var urlStop = "http://bustime.mta.info/api/siri/stop-monitoring.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&OperatorRef=MTA&MonitoringRef=308209&LineRef=MTA%20NYCT_B63";
+     var dataStop
+      //var urlMBTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mbta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2"; //where the api call and key goes
+      //var dataMBTA;
+      var urlMTA = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mta.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
+      var dataMTA;
   //     var urlMTABC = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/mtabc.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&includePolylines=false&version=2";
 //      var dataMTABC;
       
@@ -89,13 +92,13 @@
     var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
     var dataForecast;
       var xhttp = new XMLHttpRequest();
-          xhttp.onload = whenLoadedMBTA;
-          xhttp.open("GET", urlMBTA);
+          xhttp.onload = whenLoadedStop;
+          xhttp.open("GET", urlStop);
          // xhttp.overrideMimeType("application/json");
           xhttp.send();
          
        
-    function whenLoadedMBTA() {
+    function whenLoadedStop() {
     //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
         
@@ -104,9 +107,9 @@
         xhttp.overrideMimeType("application/json");
         xhttp.send();
         //Loads info from this link, not sure which wrapper this is.
-        //http://bustime.mta.info/api/siri/stop-monitoring.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&OperatorRef=MTA&MonitoringRef=308209&LineRef=MTA%20NYCT_B63
-        var buslng =dataMBTA.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
-        var buslat = dataMBTA.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+        
+        var buslng =dataStop.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
+        var buslat = dataStop.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
         
     }
 
