@@ -69,6 +69,7 @@
       </div>
   </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
    <div class="maps">
        <h1>Bus Tracking Would Go Here</h1>
@@ -79,6 +80,8 @@
   
 
 >>>>>>> parent of 5e635ac... final update
+=======
+>>>>>>> parent of f1ceeda... Final Prototype
   
   
     <!-- page structure above this comment code below-->
@@ -100,6 +103,7 @@
     var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
     var dataForecast;
       var xhttp = new XMLHttpRequest();
+<<<<<<< HEAD
           xhttp.onload = whenLoadedMBTA;
           xhttp.open("GET", urlMBTA);
          // xhttp.overrideMimeType("application/json");
@@ -109,6 +113,58 @@
     function whenLoadedMBTA() {
     //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
+=======
+          xhttp.open("GET", urlBus);
+          xhttp.onload = initMap;
+          xhttp.send();
+         
+        
+       function initMap() {
+        dataBus = JSON.parse(xhttp.responseText);
+        
+        xhttp.open("GET", urlBus);
+          xhttp.onload = Weatherfetch;
+          xhttp.send();
+        
+        var buslng = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
+        var buslat = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+           
+           
+        var Testbus = {lat: buslat , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
+        //var stopLat = 
+        //var stopLng
+        //lat: stopLat, lng:stopLng
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: Testbus
+        });
+        
+       var contentString = '<div id="content">'+
+            '<div id="siteNotice">'+
+            '</div>'+
+            '<h1 id="firstHeading" class="firstHeading">Testbus</h1>'+
+            '<div id="bodyContent">'+
+            '<p><b>Testbus</b>, On route:<b>route name</b>, is a large ' +
+            
+            '</div>'+
+            '</div>';
+       
+       var marker = new google.maps.Marker({
+          position: Testbus,
+          map: map
+           
+        });
+       marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+      }
+       
+       
+       
+       
+    function Weatherfetch() {
+        dataBus = JSON.parse(xhttp.responseText);
+>>>>>>> parent of f1ceeda... Final Prototype
         
         xhttp.open("GET", urlMTA);
         xhttp.onload = weatherfetch;
@@ -127,6 +183,7 @@
         
     //  }    
       
+<<<<<<< HEAD
      // function whenLoadedMTABC() {
       //  dataMTABC = JSON.parse(xhttp.responseText);
     //  }
@@ -134,6 +191,10 @@
       
       var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
     var dataCurrent;
+=======
+      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+      var dataCurrent;
+>>>>>>> parent of f1ceeda... Final Prototype
    
       
       
@@ -150,6 +211,7 @@
          
            function whenLoadedCurrent() {
                  
+<<<<<<< HEAD
       dataCurrent = JSON.parse(xhttp.responseText)
     
                Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
@@ -157,6 +219,19 @@
               windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
               Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
               feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
+=======
+                dataCurrent = JSON.parse(xhttp.responseText)
+    
+                    Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
+              
+                    curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
+              
+                    windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
+              
+                    Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
+              
+                    feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
+>>>>>>> parent of f1ceeda... Final Prototype
       
             }
           }
@@ -203,6 +278,7 @@
               
         }*/
       </script>
+<<<<<<< HEAD
       
      <script>
    
@@ -237,6 +313,9 @@
       }
 
       </script> 
+=======
+    
+>>>>>>> parent of f1ceeda... Final Prototype
  <script> 
 
 </script>
