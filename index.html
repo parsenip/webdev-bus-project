@@ -1,7 +1,6 @@
 <!doctype html>
 <html>
   <head>
-    <title>Bus It! - Home</title>
     
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
   </head> 
@@ -13,11 +12,9 @@
     button blue #12377E -->   
 
   
-<iframe src="http://free.timeanddate.com/clock/i6813igv/n179/fs30/fcfff/tc12377e/pc12377e" frameborder="0" width="241" height="36"></iframe>
  
 
  <div class="banner">
-     <h1>BusIt! (Demo)</h1>
      <h3>Your (literal) one stop for the NYC bus system</h3>
  </div>
  
@@ -33,37 +30,18 @@
  
 <div class="input">
  <form action="">
-    <select name="Address">
        <!-- <option value="borough">borough</option> -->
-        <option value="line">Line</option>
-        <option value="stop">Stop</option>
-    </select>
+    </select><br>
     <input type="submit" value="submit">
 </form>
       </div>
-   <div class="maps">
-       <h1>Google Maps</h1>
-       <div id="map"></div>
-   </div> 
-        
-<div class="busing">
-    <h1>Busing test</h1>
 </div>
-  
-  <div class="weather">
-     <h1>Weather</h1>
-      <div id="Updated">
-      
-      </div>
       <div id="curweath">
       
-      </div> 
       <div id="windspeed">
-      </div>
       
       <div id="temp">
       
-      </div>
       <div id="feelslike">
           
       </div>
@@ -76,6 +54,7 @@
      <!--Script for grabbing api's-->  
    <script>
      //bustime GET/eventlistiener
+<<<<<<< HEAD
      // This pulls from real-time bus info
      var urlStop = "http://bustime.mta.info/api/siri/stop-monitoring.json?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&OperatorRef=MTA&MonitoringRef=308209&LineRef=MTA%20NYCT_B63";
      var dataStop
@@ -88,77 +67,66 @@
       
     var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
     var dataCurent;
-    //" + stopLat + ", " + stopLng + ".json"
-    var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
-    var dataForecast;
       var xhttp = new XMLHttpRequest();
+<<<<<<< HEAD
           xhttp.onload = whenLoadedStop;
           xhttp.open("GET", urlStop);
          // xhttp.overrideMimeType("application/json");
+=======
+>>>>>>> 5e635ac6b53abb1e77967ea73c8647035c81b520
           xhttp.send();
          
+        
        
+<<<<<<< HEAD
     function whenLoadedStop() {
     //  console.log(xhttp);
         dataMBTA = JSON.parse(xhttp.responseText);
+=======
+>>>>>>> 5e635ac6b53abb1e77967ea73c8647035c81b520
         
-        xhttp.open("GET", urlMTA);
-        xhttp.onload = weatherfetch;
         xhttp.overrideMimeType("application/json");
         xhttp.send();
+<<<<<<< HEAD
         //Loads info from this link, not sure which wrapper this is.
         
         var buslng =dataStop.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
         var buslat = dataStop.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;
+=======
+        
+>>>>>>> 5e635ac6b53abb1e77967ea73c8647035c81b520
         
     }
 
-     // function whenLoadedMTA() {
-        //dataMTA = JSON.parse(xhttp.responseText);
-        
-        
-    //  }    
+    
       
-     // function whenLoadedMTABC() {
-      //  dataMTABC = JSON.parse(xhttp.responseText);
-    //  }
-       
-      
-      var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
-    var dataCurrent;
-   
+
       
       
-        var curweath =  document.getElementById("curweath");
           var Updated = document.getElementById("Updated");
           var windspeed = document.getElementById("windspeed");
           var Temp = document.getElementById("temp")
           var feelslike = document.getElementById("feelslike")
           
-          function weatherfetch() {
-              xhttp.open("GET",weatherCurrent);
-              xhttp.onload = whenLoadedCurrent;
-              xhttp.send();
-         
+          
            function whenLoadedCurrent() {
                  
-      dataCurrent = JSON.parse(xhttp.responseText)
     
-               Updated.innerHTML = "Date updated: " + dataCurrent.current_observation.observation_time;
-              curweath.innerHTML = "Current Weather: " + dataCurrent.current_observation.weather;
-              windspeed.innerHTML = "Current wind speed: " + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)";
-              Temp.innerHTML = "Current temperture: " + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)"
-              feelslike.innerHTML = "Feels like: " + dataCurrent.current_observation.feelslike_string;
+              
+                    
+              
+                    windspeed.innerHTML = '<h1>Current wind speed: </h1><h3 style="color: pink;">' + dataCurrent.current_observation.wind_mph + "MPH" + " (" + dataCurrent.current_observation.wind_kph + "KPH)" + ", with gusts up to " + dataCurrent.current_observation.wind_gust_mph + "MPH (" + dataCurrent.current_observation.wind_gust_kph + "KPH)</h3>";
+              
+              Temp.innerHTML = '<h1>Current temperture: </h1><h3 style="color: pink;">' + dataCurrent.current_observation.temp_f + "F (" + dataCurrent.current_observation.temp_c + "C)</h3>";
+              
       
             }
-          }
            
      // function whenLoadedForecast(){
      // dataForecast = 
      // JSON.parse(xhttp.responseText);
      // }
       </script>
-
       <script>/*
       var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json"
       
@@ -195,43 +163,8 @@
               
         }*/
       </script>
-      
-     <script>
-   
-   function initMap() {
-        var Testbus = {lat: buslat , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
-        //var stopLat = 
-        //var stopLng
-        //lat: stopLat, lng:stopLng
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
-          center: Testbus
-        });
-        
-       var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Testbus</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Testbus</b>, On route:<b>route name</b>, is a large ' +
-            
-            '</div>'+
-            '</div>';
-       
-       var marker = new google.maps.Marker({
-          position: Testbus,
-          map: map
-           Title: 'Testbus (Busroute)'
-        });
-       marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
-      }
+    
 
-      </script> 
- <script> 
-
-</script>
 
 
   </body>
