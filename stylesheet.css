@@ -6,7 +6,13 @@ html {
     height: 400px;
     width: 80%;
 }
-
+#next-bus {
+font-size: 60px;
+}
+.bus-data {
+color:fuchsia;
+font-size: 30px;
+}
 .banner {
   width: 60%;
   -webkit-box-sizing: content-box;

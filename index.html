@@ -31,19 +31,29 @@
         
  </div>
  
-<div class="input">
+<!--<div class="input">
  <form action="">
-       <!-- <option value="borough">borough</option> -->
+        <option value="borough">borough</option> 
        <select name="line">Line<br>
        <option value="Choose A Bus Line" selected>Choose A Bus Line</option></select><br>
         <select value="stop" name="stop">Stop
     </select><br>
     <input type="submit" value="submit">
 </form>
-      </div>
+      </div>-->
       <div class="busing">
-    <h1>Bus info goes here</h1>
+    <h1 id ="next-bus">Next Bus</h1>
+    <div id="line"></div><br>
+    <div id="stop"></div><br>
+    <div id="distance"></div><br>
+    <div id="eta"></div><br>
+    <div id="terminus"></div><br>
 </div>
+      <div class="maps">
+   <h1>Location of Nearest Bus</h1>
+       <div id="map"></div>
+    
+   </div> 
     <div class="weather">
     
      
@@ -63,11 +73,7 @@
       
       </div>
   </div>
-   <div class="maps">
-   <h1>Bus Tracking Would Go Here</h1>
-       <div id="map"></div>
-           <img src="https://i.imgur.com/ujWDRLl.png" alt="bus tracking would go here">
-   </div> 
+
         
 
   
@@ -83,12 +89,11 @@
       var urlBus = "http://rvccmccs01.raritanval.edu/~scaruso/cisy268/stop-monitoring.php?key=A0f4f68f-5ed0-45d8-b0ce-e127971315b1&MonitoringRef=308209"; //where the api call and key goes
       var dataBus;
  
-    var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
-    var dataCurent;
+  
    // var weatherForcast = "http://api.wunderground.com/api/04a13f21c29c4d09/forecast/q/NY/New_York.json";
    // var dataForecast;
       var xhttp = new XMLHttpRequest();
-          xhttp.open("GET", weatherCurrent);
+          xhttp.open("GET",  urlBus);
           xhttp.onload = initMap;
           xhttp.send();
          
@@ -96,29 +101,39 @@
        function initMap() {
         dataBus = JSON.parse(xhttp.responseText);
         
-        xhttp.open("GET", urlBus);
+        xhttp.open("GET", weatherCurrent);
           xhttp.onload = Weatherfetch;
           xhttp.send();
+          document.getElementById("line").innerHTML = '<h1>Current line: </h1><h2 class="bus-data">' + dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.PublishedLineName + '</h2>';
+          document.getElementById("stop").innerHTML = '<h1>Current stop: </h1><h2 class="bus-data">' + dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.StopPointName + '</h2>';
+          
+          document.getElementById("distance").innerHTML = '<h1>Current distance of bus: </h1><h2 class="bus-data">' + dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance + '</h2>';
+          
+          document.getElementById("eta").innerHTML = '<h1>Estimated time of arrival: </h1><h2 class="bus-data">' + dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.MonitoredCall.ExpectedArrivalTime + "</h2>";
+          
+          document.getElementById("terminus").innerHTML = '<h1>Direction : </h1><h2 class="bus-data">' + dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.DestinationName + "</h2>";
+          
         
-        /*var buslng = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Longitude;
-        var buslat = dataBusSiri.ServiceDelivery.StopMonitoringDelivery.MonitoredStopVisit.MonitoredVehicleJourney.VehicleLocation.Latitude;*/
+        
+        var buslng = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.VehicleLocation.Longitude;
+        var buslat = dataBus.Siri.ServiceDelivery.StopMonitoringDelivery[0].MonitoredStopVisit[0].MonitoredVehicleJourney.VehicleLocation.Latitude;
            
            
-        var Testbus = {lat: 40.730610 , lng: -73.935242};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
+        var Testbus = {lat: buslat , lng: buslng};  //buslng and buslat feed their info here and determine the possition of the marker. if we had more time we could work this for multiple buses provided the json wasn't awful
         //var stopLat = 
         //var stopLng
         //lat: stopLat, lng:stopLng
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 10,
+          zoom: 15,
           center: Testbus
         });
         
        var contentString = '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Testbus</h1>'+
+            '<h1 id="firstHeading" class="firstHeading">Current location</h1>'+
             '<div id="bodyContent">'+
-            '<p><b>Testbus</b>, On route:<b>route name</b>, is a large ' +
+            '<p><b><The next bus</b>, On route:<b><span id="line></span></b>, will arrive at <b><span id="eta"></span></b> ' +
             
             '</div>'+
             '</div>';
@@ -136,17 +151,17 @@
         });
       }
        
-             var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/NY/New_York.json";
+             var weatherCurrent = "http://api.wunderground.com/api/04a13f21c29c4d09/conditions/q/40.676044,-73.980708.json";
       var dataCurrent;
    
        
        
     function Weatherfetch() {
-        dataBus = JSON.parse(xhttp.responseText);
+        dataCurrent = JSON.parse(xhttp.responseText);
         
         xhttp.open("GET", weatherCurrent);
         xhttp.onload = whenLoadedCurrent;
-        xhttp.overrideMimeType("application/json");
+        //xhttp.overrideMimeType("application/json");
         xhttp.send();
         
         
